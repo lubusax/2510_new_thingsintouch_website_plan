@@ -64,146 +64,11 @@
     </div>
 
     <script>
-        // Store all HTML content in a single JavaScript object to avoid network requests.
-        const fileContents = {
-            'roadmap.html': `
-                <div class="max-w-5xl mx-auto py-4">
-                    <header class="text-center mb-16">
-                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
-                            Integrated Recommendations &<br class="hidden md:block">
-                            <span class="gradient-text">Phased Implementation Roadmap</span>
-                        </h1>
-                        <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
-                            This document synthesizes our analysis into a cohesive technology stack and a clear, phased implementation plan. The roadmap is designed to de-risk the project by focusing on an MVP first, followed by a full international rollout and post-launch optimization.
-                        </p>
-                    </header>
-                    <section class="mb-20">
-                        <h2 class="text-3xl font-bold text-slate-900 mb-2">
-                            <span class="text-indigo-600">5.1</span> Synthesis of Recommended Technology Stack
-                        </h2>
-                        <p class="text-slate-600 mb-10">A curated selection of best-in-class technologies chosen for performance, scalability, and internationalization within a headless architectural framework.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <div class="bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200/80 hover:shadow-xl transition-shadow duration-300">
-                                <div class="flex items-center justify-center bg-orange-100 rounded-xl w-14 h-14 mb-5">
-                                    <svg class="w-8 h-8 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 6.4a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10.995 0A2.5 2.5 0 1 1 11 6.4a2.5 2.5 0 0 1-5.495 0Zm.005 6.6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm10.99 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM8.005 13a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm7.995 0a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Hosting: Cloudflare Pages</h3>
-                                <p class="text-slate-600">Superior European performance, unlimited free bandwidth, and a robust ecosystem for scaling with edge computing.</p>
-                            </div>
-                            <div class="bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200/80 hover:shadow-xl transition-shadow duration-300">
-                                <div class="flex items-center justify-center bg-purple-100 rounded-xl w-14 h-14 mb-5">
-                                    <svg class="w-8 h-8 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2">SSG: Hugo</h3>
-                                <p class="text-slate-600">Exceptional build speed and powerful, native support for multilingual websites, simplifying development.</p>
-                            </div>
-                            <div class="bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200/80 hover:shadow-xl transition-shadow duration-300">
-                                <div class="flex items-center justify-center bg-blue-100 rounded-xl w-14 h-14 mb-5">
-                                <svg class="w-8 h-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5-3.75a8.25 8.25 0 0 0-16.5 0" /></svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Headless CMS: Strapi</h3>
-                                <p class="text-slate-600">Flexible content modeling and built-in localization features for efficient product information management.</p>
-                            </div>
-                            <div class="bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200/80 hover:shadow-xl transition-shadow duration-300">
-                                <div class="flex items-center justify-center bg-indigo-100 rounded-xl w-14 h-14 mb-5">
-                                <svg class="w-8 h-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h6m-3-3.75l-3 1.5m3-1.5l3 1.5m-6-1.5v-1.5a1.5 1.5 0 0 1 1.5-1.5h1.5a1.5 1.5 0 0 1 1.5 1.5v1.5m-6 0v3a1.5 1.5 0 0 0 1.5 1.5h1.5a1.5 1.5 0 0 0 1.5-1.5v-3m-6.75-11.25a1.5 1.5 0 0 1 1.5-1.5h9.75a1.5 1.5 0 0 1 1.5 1.5v11.25a1.5 1.5 0 0 1-1.5 1.5h-9.75a1.5 1.5 0 0 1-1.5-1.5V6.75Z" /></svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Payment Gateway: Stripe</h3>
-                                <p class="text-slate-600">Developer-first APIs essential for custom checkout and superior handling of multi-currency transactions.</p>
-                            </div>
-                            <div class="bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200/80 hover:shadow-xl transition-shadow duration-300">
-                                <div class="flex items-center justify-center bg-sky-100 rounded-xl w-14 h-14 mb-5">
-                                <svg class="w-8 h-8 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9.88-2.25h15.88" /></svg>
-                                </div>
-                                <h3 class="text-xl font-semibold text-slate-900 mb-2">Dev Environment: VS Code</h3>
-                                <p class="text-slate-600">Versatile and powerful code editor with a vast ecosystem of extensions to streamline development.</p>
-                            </div>
-                        </div>
-                    </section>
-                    <div>
-                        <div class="relative pl-10 md:pl-16 phase-timeline">
-                            <div class="absolute left-0 flex items-center justify-center w-11 h-11 bg-white border-4 border-indigo-500 rounded-full">
-                                <span class="text-indigo-600 font-bold text-xl">1</span>
-                            </div>
-                            <div class="pb-16">
-                                <h2 class="text-3xl font-bold text-slate-900 mb-2"><span class="text-indigo-600">5.2</span> Phase 1: Foundation and MVP</h2>
-                                <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-r-lg my-4">
-                                    <strong class="text-indigo-800">Objective:</strong>
-                                    <p class="text-indigo-700">Launch a single-language (English) and single-currency (EUR) version of the website to rapidly validate the core business proposition.</p>
-                                </div>
-                                <h4 class="font-semibold text-lg text-slate-800 mt-6 mb-3">Key Steps:</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Platform Setup:</strong> Create Cloudflare Pages account and establish Git-based deployment workflow.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Core Site Development:</strong> Develop fundamental website structure and templates using Hugo.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Content & Product Management:</strong> Set up Strapi and populate with product information in English.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Payment Integration:</strong> Integrate Stripe Elements, configured for EUR payments.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Initial Tax Logic:</strong> Implement a simplified VAT calculation for a single EU market (e.g., Germany at 19%).</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Deployment and Testing:</strong> Deploy and conduct thorough end-to-end testing.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="relative pl-10 md:pl-16 phase-timeline">
-                            <div class="absolute left-0 flex items-center justify-center w-11 h-11 bg-white border-4 border-indigo-500 rounded-full">
-                                <span class="text-indigo-600 font-bold text-xl">2</span>
-                            </div>
-                            <div class="pb-16">
-                                <h2 class="text-3xl font-bold text-slate-900 mb-2"><span class="text-indigo-600">5.3</span> Phase 2: Internationalization & Expansion</h2>
-                                <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-r-lg my-4">
-                                    <strong class="text-indigo-800">Objective:</strong>
-                                    <p class="text-indigo-700">Roll out full multi-language and multi-currency support for Spain, France, Germany, Italy, and Switzerland.</p>
-                                </div>
-                                <h4 class="font-semibold text-lg text-slate-800 mt-6 mb-3">Key Steps:</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Content Translation:</strong> Populate CMS with translations for Spanish, French, German, and Italian.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Multilingual Site Generation:</strong> Configure Hugo to generate language-specific site versions.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Geolocation Logic:</strong> Deploy Cloudflare Worker for geolocation-based language redirection.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Multi-Currency Payments:</strong> Enhance Stripe to dynamically set currency (CHF for Switzerland, EUR for EU).</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Comprehensive Tax Implementation:</strong> Expand logic for specific VAT rates of all five target countries.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">UI Enhancements:</strong> Add a user-facing country and language selector.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="relative pl-10 md:pl-16">
-                            <div class="absolute left-0 flex items-center justify-center w-11 h-11 bg-white border-4 border-indigo-500 rounded-full">
-                                <span class="text-indigo-600 font-bold text-xl">3</span>
-                            </div>
-                            <div class="pb-16">
-                                <h2 class="text-3xl font-bold text-slate-900 mb-2"><span class="text-indigo-600">5.4</span> Phase 3: Launch, Monitoring & Optimization</h2>
-                                <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-r-lg my-4">
-                                    <strong class="text-indigo-800">Objective:</strong>
-                                    <p class="text-indigo-700">Go live with the fully internationalized website and implement a robust strategy for ongoing monitoring and improvement.</p>
-                                </div>
-                                <h4 class="font-semibold text-lg text-slate-800 mt-6 mb-3">Key Steps:</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Full Launch:</strong> Deploy the complete, internationalized version of the website.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Performance Monitoring:</strong> Utilize Cloudflare's analytics to monitor traffic, load times, and Core Web Vitals.</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">API and Service Health:</strong> Set up uptime monitoring for critical third-party services (CMS, Stripe).</span></li>
-                                    <li class="flex items-start"><svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span class="text-slate-600"><strong class="text-slate-700">Ongoing Optimization:</strong> Establish a workflow for continuous improvement, including content updates, SEO audits, and conversion funnel analysis.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
-            'placeholder_two.html': `
-                <div class="text-center py-20">
-                    <h2 class="text-3xl font-bold text-slate-800">Content for File Two</h2>
-                    <p class="text-slate-600 mt-4">This is the placeholder content for the second document.</p>
-                </div>
-            `,
-            'placeholder_three.html': `
-                <div class="text-center py-20">
-                    <h2 class="text-3xl font-bold text-slate-800">Content for File Three</h2>
-                    <p class="text-slate-600 mt-4">This is the placeholder content for the third document.</p>
-                </div>
-            `
-        };
-
         const contentContainer = document.getElementById('content-container');
         const navButtonsContainer = document.getElementById('nav-buttons');
 
-        // This function now reads from the JavaScript object instead of fetching a URL.
-        function loadContent(fileName, clickedButton) {
+        // This function now fetches the content from a separate file.
+        async function loadContent(fileName, clickedButton) {
             // Highlight the active button
             const buttons = navButtonsContainer.querySelectorAll('.nav-btn');
             buttons.forEach(button => button.classList.remove('btn-active'));
@@ -211,22 +76,25 @@
                 clickedButton.classList.add('btn-active');
             }
             
-            // Get content from the object
-            const content = fileContents[fileName];
-
-            if (content) {
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const content = await response.text();
                 contentContainer.innerHTML = content;
-            } else {
-                console.error(`Content for "${fileName}" not found in fileContents object.`);
+            } catch (error) {
+                console.error(`Error fetching content for "${fileName}":`, error);
                 contentContainer.innerHTML = `
                     <div class="text-center py-20">
                         <h2 class="text-2xl font-bold text-red-500">Error Loading Content</h2>
-                        <p class="text-slate-600 mt-2">Could not find the content for: <strong>${fileName}</strong>.</p>
+                        <p class="text-slate-600 mt-2">Could not load content from: <strong>${fileName}</strong>.</p>
+                        <p class="text-slate-500 mt-1 text-sm">Please check the browser console for more details.</p>
                     </div>`;
             }
         }
 
-        // No changes needed here, it correctly calls the modified loadContent function.
+        // Load the initial content when the page is ready
         document.addEventListener('DOMContentLoaded', () => {
             const firstButton = navButtonsContainer.querySelector('.nav-btn');
             if (firstButton) {
@@ -237,4 +105,3 @@
 
 </body>
 </html>
-
