@@ -24,6 +24,10 @@
             color: #64748b;
             padding: 0.5rem 0;
             border-bottom: 1px solid #e2e8f0;
+            /* Allow the Monday date to span multiple columns if needed for readability */
+            grid-column-end: span 5;
+            text-align: left;
+            padding-left: 0.5rem;
         }
         .phase-label {
             font-weight: 600;
@@ -153,23 +157,30 @@
             let dayCounter = 0;
             let currentGridColumn = 2; // Grid columns start at 1, our headers start at column 2
             
-            // Loop until we have generated 20 working days
+            // Loop until we have processed 20 working days to cover the entire grid span
             for (let i = 0; dayCounter < 20; i++) { 
                 const currentDate = new Date(startDate);
                 currentDate.setDate(startDate.getDate() + i);
-                const dayOfWeek = currentDate.getDay(); // 0=Sunday, 6=Saturday
+                const dayOfWeek = currentDate.getDay(); // 0=Sunday, 6=Saturday, 1=Monday
 
-                // Skip weekends
+                // Process only weekdays to correctly advance the grid column
                 if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                     dayCounter++;
-                    const header = document.createElement('div');
-                    header.classList.add('header-day');
-                    
-                    // Explicitly set the grid column for proper alignment
-                    header.style.gridColumn = currentGridColumn;
-                    header.innerHTML = `D${dayCounter}<br>${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-                    
-                    container.appendChild(header);
+
+                    // If the current day is a Monday, create and append a header
+                    if (dayOfWeek === 1) {
+                        const header = document.createElement('div');
+                        header.classList.add('header-day');
+                        
+                        // Explicitly set the grid column for proper alignment
+                        header.style.gridColumnStart = currentGridColumn;
+                        
+                        // Display the date
+                        header.innerHTML = `${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                        
+                        container.appendChild(header);
+                    }
+                    // Always advance the grid column for every working day
                     currentGridColumn++;
                 }
             }
@@ -177,4 +188,5 @@
     </script>
 </body>
 </html>
+
 
