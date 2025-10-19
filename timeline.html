@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Timeline: Odoo Attendance Terminal Website</title>
-    <!-- Note: Tailwind is already loaded by index.html -->
-    <style>
+    <!-- Note: Tailwind is already loaded by index.html --><style>
         /* Styles specific to this timeline view */
         .timeline-body {
             font-family: 'Inter', sans-serif;
@@ -54,6 +53,9 @@
         .bar-phase-3 { grid-column: 7 / span 7; background-color: #ec4899; } /* Pink */
         .bar-phase-4 { grid-column: 14 / span 5; background-color: #f97316; } /* Orange */
         .bar-phase-5 { grid-column: 19 / span 3; background-color: #10b981; } /* Emerald */
+        .week-separator {
+            border-left: 2px dotted #64748b; /* slate-500 */
+        }
     </style>
 </head>
 <body class="timeline-body p-4 md:p-8">
@@ -65,53 +67,42 @@
 
         <div class="overflow-x-auto">
             <div class="timeline-container min-w-[1200px]" id="day-headers-container">
-                <!-- Header Row -->
-                <div class="phase-label"></div>
-                <!-- Day Headers will be generated and inserted here by the script below -->
-            </div>
-            <div class="timeline-container min-w-[1200px] mt-2">
-                <!-- Phase 1 -->
-                <div class="phase-label">Phase 1:<br>Strategy</div>
+                <!-- Header Row --><div class="phase-label"></div>
+                <!-- Day Headers will be generated and inserted here by the script below --></div>
+            <div class="timeline-container min-w-[1200px] mt-2" id="task-bars-container">
+                <!-- Phase 1 --><div class="phase-label">Phase 1:<br>Strategy</div>
                 <div class="task-bar bar-phase-1">
                     <span>Planning</span>
                     <span>2 Days</span>
                 </div>
 
-                <!-- Spacer -->
-                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+                <!-- Spacer --><div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-                <!-- Phase 2 -->
-                <div class="phase-label">Phase 2:<br>Design</div>
+                <!-- Phase 2 --><div class="phase-label">Phase 2:<br>Design</div>
                 <div class="task-bar bar-phase-2">
                     <span>UI/UX Design</span>
                     <span>3 Days</span>
                 </div>
 
-                <!-- Spacer -->
-                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+                <!-- Spacer --><div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-                <!-- Phase 3 -->
-                <div class="phase-label">Phase 3:<br>Development</div>
+                <!-- Phase 3 --><div class="phase-label">Phase 3:<br>Development</div>
                 <div class="task-bar bar-phase-3">
                     <span>Development & Integration</span>
                     <span>7 Days</span>
                 </div>
 
-                <!-- Spacer -->
-                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+                <!-- Spacer --><div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-                <!-- Phase 4 -->
-                <div class="phase-label">Phase 4:<br>Content</div>
+                <!-- Phase 4 --><div class="phase-label">Phase 4:<br>Content</div>
                 <div class="task-bar bar-phase-4">
                     <span>Content & SEO</span>
                     <span>5 Days</span>
                 </div>
                 
-                <!-- Spacer -->
-                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+                <!-- Spacer --><div style="grid-column: 1 / -1; height: 1rem;"></div>
 
-                <!-- Phase 5 -->
-                <div class="phase-label">Phase 5:<br>Launch</div>
+                <!-- Phase 5 --><div class="phase-label">Phase 5:<br>Launch</div>
                 <div class="task-bar bar-phase-5">
                     <span>Testing & Deploy</span>
                     <span>3 Days</span>
@@ -144,12 +135,13 @@
     <script>
         // Using a self-executing function to avoid polluting the global scope
         (() => {
-            // Find the container for the day headers using its ID
-            const container = document.getElementById('day-headers-container');
+            // Find the containers for the day headers and tasks using their IDs
+            const headerContainer = document.getElementById('day-headers-container');
+            const taskContainer = document.getElementById('task-bars-container');
             
-            // If the container doesn't exist for some reason, stop the script
-            if (!container) {
-                console.error('Day headers container not found!');
+            // If the containers don't exist for some reason, stop the script
+            if (!headerContainer || !taskContainer) {
+                console.error('Timeline container(s) not found!');
                 return;
             }
 
@@ -167,18 +159,28 @@
                 if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                     dayCounter++;
 
-                    // If the current day is a Monday, create and append a header
+                    // If the current day is a Monday, create and append a header and separators
                     if (dayOfWeek === 1) {
                         const header = document.createElement('div');
                         header.classList.add('header-day');
-                        
-                        // Explicitly set the grid column for proper alignment
                         header.style.gridColumnStart = currentGridColumn;
-                        
-                        // Display the date
                         header.innerHTML = `${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                        headerContainer.appendChild(header);
                         
-                        container.appendChild(header);
+                        // Add separator line to header grid
+                        const headerSeparator = document.createElement('div');
+                        headerSeparator.className = 'week-separator';
+                        headerSeparator.style.gridColumnStart = currentGridColumn;
+                        headerSeparator.style.gridRow = '1';
+                        headerContainer.appendChild(headerSeparator);
+
+                        // Add separator line to task grid
+                        const taskSeparator = document.createElement('div');
+                        taskSeparator.className = 'week-separator';
+                        taskSeparator.style.gridColumnStart = currentGridColumn;
+                        // 5 tasks + 4 spacers = 9 rows in the task grid
+                        taskSeparator.style.gridRow = '1 / span 9';
+                        taskContainer.appendChild(taskSeparator);
                     }
                     // Always advance the grid column for every working day
                     currentGridColumn++;
@@ -188,5 +190,4 @@
     </script>
 </body>
 </html>
-
 
