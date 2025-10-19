@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Timeline: Odoo Attendance Terminal Website</title>
+    <!-- Note: Tailwind is already loaded by index.html -->
+    <style>
+        /* Styles specific to this timeline view */
+        .timeline-body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .timeline-container {
+            display: grid;
+            grid-template-columns: 150px repeat(20, 1fr);
+            gap: 4px;
+            padding: 1rem;
+        }
+        .header-day {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #64748b;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .phase-label {
+            font-weight: 600;
+            color: #1e293b;
+            padding: 1rem 0.5rem;
+            text-align: right;
+            border-right: 2px solid #cbd5e1;
+        }
+        .task-bar {
+            border-radius: 6px;
+            color: white;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .bar-phase-1 { grid-column: 2 / span 2; background-color: #38bdf8; } /* Light Blue */
+        .bar-phase-2 { grid-column: 4 / span 3; background-color: #6366f1; } /* Indigo */
+        .bar-phase-3 { grid-column: 7 / span 7; background-color: #ec4899; } /* Pink */
+        .bar-phase-4 { grid-column: 14 / span 5; background-color: #f97316; } /* Orange */
+        .bar-phase-5 { grid-column: 19 / span 3; background-color: #10b981; } /* Emerald */
+    </style>
+</head>
+<body class="timeline-body p-4 md:p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Website Development Timeline</h1>
+            <p class="text-gray-600 mt-2">Odoo Attendance Terminal | Start Date: October 20, 2025</p>
+        </div>
+
+        <div class="overflow-x-auto">
+            <div class="timeline-container min-w-[1200px]">
+                <!-- Header Row -->
+                <div class="phase-label"></div>
+                <!-- Generate Day Headers -->
+                <script>
+                    const startDate = new Date('2025-10-20T00:00:00');
+                    const container = document.currentScript.parentElement;
+                    let dayCounter = 0;
+                    // Find the correct grid column to start on, even if weekends are skipped
+                    let currentGridColumn = 2; 
+                    for (let i = 0; dayCounter < 20; i++) { 
+                        const currentDate = new Date(startDate);
+                        currentDate.setDate(startDate.getDate() + i);
+                        const dayOfWeek = currentDate.getDay(); // 0=Sun, 6=Sat
+
+                        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                            dayCounter++;
+                            const header = document.createElement('div');
+                            header.classList.add('header-day');
+                             // Explicitly set the column for the header
+                            header.style.gridColumn = currentGridColumn;
+                            header.innerHTML = `D${dayCounter}<br>${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                            container.appendChild(header);
+                            currentGridColumn++;
+                        }
+                    }
+                </script>
+            </div>
+            <div class="timeline-container min-w-[1200px] mt-2">
+                <!-- Phase 1 -->
+                <div class="phase-label">Phase 1:<br>Strategy</div>
+                <div class="task-bar bar-phase-1">
+                    <span>Planning</span>
+                    <span>2 Days</span>
+                </div>
+
+                <!-- Spacer -->
+                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+
+                <!-- Phase 2 -->
+                <div class="phase-label">Phase 2:<br>Design</div>
+                <div class="task-bar bar-phase-2">
+                    <span>UI/UX Design</span>
+                    <span>3 Days</span>
+                </div>
+
+                <!-- Spacer -->
+                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+
+                <!-- Phase 3 -->
+                <div class="phase-label">Phase 3:<br>Development</div>
+                <div class="task-bar bar-phase-3">
+                    <span>Development & Integration</span>
+                    <span>7 Days</span>
+                </div>
+
+                <!-- Spacer -->
+                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+
+                <!-- Phase 4 -->
+                <div class="phase-label">Phase 4:<br>Content</div>
+                <div class="task-bar bar-phase-4">
+                    <span>Content & SEO</span>
+                    <span>5 Days</span>
+                </div>
+                
+                <!-- Spacer -->
+                <div style="grid-column: 1 / -1; height: 1rem;"></div>
+
+                <!-- Phase 5 -->
+                <div class="phase-label">Phase 5:<br>Launch</div>
+                <div class="task-bar bar-phase-5">
+                    <span>Testing & Deploy</span>
+                    <span>3 Days</span>
+                </div>
+
+            </div>
+        </div>
+         <div class="mt-8 pt-6 border-t">
+            <h3 class="text-lg font-semibold text-gray-700">Project Summary</h3>
+            <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="text-2xl font-bold text-gray-800">160</div>
+                    <div class="text-sm text-gray-600">Total Hours</div>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="text-2xl font-bold text-gray-800">20</div>
+                    <div class="text-sm text-gray-600">Working Days</div>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="text-2xl font-bold text-gray-800">4</div>
+                    <div class="text-sm text-gray-600">Calendar Weeks</div>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="text-2xl font-bold text-gray-800">Nov 14, 2025</div>
+                    <div class="text-sm text-gray-600">Estimated Completion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
