@@ -60,33 +60,10 @@
         </div>
 
         <div class="overflow-x-auto">
-            <div class="timeline-container min-w-[1200px]">
+            <div class="timeline-container min-w-[1200px]" id="day-headers-container">
                 <!-- Header Row -->
                 <div class="phase-label"></div>
-                <!-- Generate Day Headers -->
-                <script>
-                    const startDate = new Date('2025-10-20T00:00:00');
-                    const container = document.currentScript.parentElement;
-                    let dayCounter = 0;
-                    // Find the correct grid column to start on, even if weekends are skipped
-                    let currentGridColumn = 2; 
-                    for (let i = 0; dayCounter < 20; i++) { 
-                        const currentDate = new Date(startDate);
-                        currentDate.setDate(startDate.getDate() + i);
-                        const dayOfWeek = currentDate.getDay(); // 0=Sun, 6=Sat
-
-                        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                            dayCounter++;
-                            const header = document.createElement('div');
-                            header.classList.add('header-day');
-                             // Explicitly set the column for the header
-                            header.style.gridColumn = currentGridColumn;
-                            header.innerHTML = `D${dayCounter}<br>${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-                            container.appendChild(header);
-                            currentGridColumn++;
-                        }
-                    }
-                </script>
+                <!-- Day Headers will be generated and inserted here by the script below -->
             </div>
             <div class="timeline-container min-w-[1200px] mt-2">
                 <!-- Phase 1 -->
@@ -160,6 +137,44 @@
             </div>
         </div>
     </div>
+    <script>
+        // Using a self-executing function to avoid polluting the global scope
+        (() => {
+            // Find the container for the day headers using its ID
+            const container = document.getElementById('day-headers-container');
+            
+            // If the container doesn't exist for some reason, stop the script
+            if (!container) {
+                console.error('Day headers container not found!');
+                return;
+            }
+
+            const startDate = new Date('2025-10-20T00:00:00');
+            let dayCounter = 0;
+            let currentGridColumn = 2; // Grid columns start at 1, our headers start at column 2
+            
+            // Loop until we have generated 20 working days
+            for (let i = 0; dayCounter < 20; i++) { 
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + i);
+                const dayOfWeek = currentDate.getDay(); // 0=Sunday, 6=Saturday
+
+                // Skip weekends
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                    dayCounter++;
+                    const header = document.createElement('div');
+                    header.classList.add('header-day');
+                    
+                    // Explicitly set the grid column for proper alignment
+                    header.style.gridColumn = currentGridColumn;
+                    header.innerHTML = `D${dayCounter}<br>${currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                    
+                    container.appendChild(header);
+                    currentGridColumn++;
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
 
